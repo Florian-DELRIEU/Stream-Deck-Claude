@@ -1,0 +1,36 @@
+{
+  "name": "stream-deck-claude",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Plugin Stream Deck : tableau de bord physique des sessions Claude Code (états, besoin de toi, raccourcis).",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart com.zv-claude-streamdeck\"",
+    "typecheck": "tsc --noEmit",
+    "test": "rollup -c && node --import tsx --test \"test/*.test.ts\" \"test/*.test.mjs\"",
+    "validate": "streamdeck validate com.zv-claude-streamdeck.sdPlugin",
+    "pack": "rollup -c && streamdeck pack com.zv-claude-streamdeck.sdPlugin -o release -f",
+    "hooks:install": "node com.zv-claude-streamdeck.sdPlugin/bin/hooks-cli.js install",
+    "hooks:uninstall": "node com.zv-claude-streamdeck.sdPlugin/bin/hooks-cli.js uninstall",
+    "hooks:status": "node com.zv-claude-streamdeck.sdPlugin/bin/hooks-cli.js status"
+  },
+  "dependencies": {
+    "@elgato/streamdeck": "^3.0.2",
+    "@elgato/utils": "0.6.1"
+  },
+  "devDependencies": {
+    "@elgato/cli": "^1.10.2",
+    "@rollup/plugin-commonjs": "^29.0.3",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "@types/node": "^24.12.0",
+    "rollup": "^4.64.5",
+    "tslib": "^2.8.1",
+    "tsx": "^4.20.0",
+    "typescript": "~5.9.3",
+    "ws": "^8.22.0"
+  }
+}

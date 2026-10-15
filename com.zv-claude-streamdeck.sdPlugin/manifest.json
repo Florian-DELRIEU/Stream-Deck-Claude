@@ -1,0 +1,44 @@
+{
+	"$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+	"UUID": "com.zv-claude-streamdeck",
+	"Name": "Claude Deck",
+	"Version": "0.1.0.0",
+	"Author": "Zeviper",
+	"Description": "Tableau de bord des sessions Claude Code : état de chaque session, besoin de toi, raccourcis.",
+	"Icon": "imgs/plugin/marketplace",
+	"Category": "Claude Deck",
+	"CategoryIcon": "imgs/plugin/category-icon",
+	"CodePath": "bin/plugin.js",
+	"SDKVersion": 3,
+	"Software": {
+		"MinimumVersion": "7.1"
+	},
+	"Nodejs": {
+		"Version": "24",
+		"Debug": "enabled"
+	},
+	"OS": [
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Actions": [
+		{
+			"Name": "Session",
+			"UUID": "com.zv-claude-streamdeck.session",
+			"Icon": "imgs/actions/session/icon",
+			"Tooltip": "Affiche une session Claude Code et son état. Pose-la autant de fois que tu veux voir de sessions.",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/session/key",
+					"TitleAlignment": "middle",
+					"FontSize": 12
+				}
+			]
+		}
+	]
+}

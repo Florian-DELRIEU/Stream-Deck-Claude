@@ -1,0 +1,9 @@
+node_modules/
+dist/
+
+# Généré par rollup
+com.zv-claude-streamdeck.sdPlugin/bin/
+com.zv-claude-streamdeck.sdPlugin/logs/
+
+*.log
+.DS_Store
