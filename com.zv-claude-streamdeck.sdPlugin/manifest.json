@@ -32,6 +32,7 @@
 			"Controllers": [
 				"Keypad"
 			],
+			"PropertyInspectorPath": "ui/session.html",
 			"States": [
 				{
 					"Image": "imgs/actions/session/key",

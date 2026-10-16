@@ -1,0 +1,36 @@
+.cd-status {
+	display: inline-block;
+	padding-top: 6px;
+	color: #d8d8d8;
+	word-break: break-word;
+}
+
+.cd-status[data-ok="true"] {
+	color: #e8916f;
+}
+
+.cd-status[data-ok="false"] {
+	color: #ed4245;
+}
+
+.cd-help {
+	color: #969696;
+	font-size: 9pt;
+	line-height: 1.4;
+	margin: 6px 12px;
+	word-break: break-word;
+}
+
+.cd-help[data-ok="true"] {
+	color: #d8d8d8;
+}
+
+.cd-help[data-ok="false"] {
+	color: #ed4245;
+}
+
+.cd-separator {
+	border: none;
+	border-top: 1px solid #3d3d3d;
+	margin: 8px 0;
+}

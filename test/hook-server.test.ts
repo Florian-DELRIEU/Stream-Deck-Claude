@@ -16,6 +16,8 @@ describe("serveur de hooks", () => {
 	before(async () => {
 		const port = await server.listen();
 		base = `http://127.0.0.1:${port}${ROUTE_PREFIX}`;
+		// Premier fetch du processus = chargement d'undici : hors de la mesure de temps.
+		await fetch(base + "health");
 	});
 	after(() => server.close());
 

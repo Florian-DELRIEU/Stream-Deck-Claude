@@ -23,6 +23,8 @@ Instantané au 2026-10-15 du document « options retenues » et de la discussion
 | Serveur (A2) | `127.0.0.1` uniquement, port **47615** par défaut (réglable en D1), routes `/claude-streamdeck/<Événement>`, contrôle de l'en-tête Host contre le DNS rebinding |
 | Hooks (A4) | Hooks HTTP sans matcher sur 15 événements, `timeout: 5` (le défaut de 600 s pourrait geler Claude si le plugin se bloquait). Installeur en ligne de commande livré dans le plugin (`bin/hooks-cli.js`) ; un bouton dans l'inspecteur viendra en D1 |
 | Interruption | Échap pendant un outil → état « Terminée » (Claude Code n'envoie pas `Stop` dans ce cas) |
+| Simplification (2026-10-16) | Premier essai : touche restée sur « — », cause invisible. Florian a demandé plus simple → 1) **choix de la session dans les réglages de la touche** : « Automatique » ou un projet de la liste, le choix suit le **dossier** (une nouvelle session dans le même dossier retrouve sa touche) ; 2) **bouton « Installer les hooks »** dans l'inspecteur, avec diagnostic (serveur, hooks, dernier hook reçu). La ligne de commande reste en secours |
+| Apparition d'une session | Une session n'apparaît qu'à son premier événement reçu : une session ouverte avant l'installation des hooks ou le démarrage du plugin s'affiche au prochain prompt. La touche affiche « en attente de Claude » tant qu'aucun hook n'est arrivé |
 
 ## Point encore ouvert
 

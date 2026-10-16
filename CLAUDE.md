@@ -30,7 +30,8 @@ Le document source vivant est dans claude.ai : « Plugin Stream Deck pour Claude
 - Cadrage : terminé.
 - Plan v1 : **validé par Florian le 2026-10-15**.
 - Jalon A (fondations) : **fait le 2026-10-15** (A2, A3, A4 vérifiés par les tests ; A1 compilé, validé et empaqueté, apparition dans Stream Deck à confirmer par Florian sous Windows).
-- Prochaine étape : jalon B, tâche **B1** (moteur de rendu pixel).
+- 2026-10-16 : simplification demandée par Florian (touche restée sur « — ») → choix de la session dans l'inspecteur + bouton « Installer les hooks » avec diagnostic (avance B2 et D1). À retester par Florian.
+- Prochaine étape : jalon B, tâche **B1** (moteur de rendu pixel), une fois la touche confirmée chez Florian.
 - Code : `README.md` (installation, commandes, organisation de `src/`). Tests : `npm test`.
 
 ## Architecture en une phrase

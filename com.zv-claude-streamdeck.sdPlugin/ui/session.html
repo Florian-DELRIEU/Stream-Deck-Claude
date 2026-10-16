@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<script src="sdpi-components.js"></script>
+		<link rel="stylesheet" href="session.css" />
+	</head>
+	<body>
+		<sdpi-item label="Session">
+			<sdpi-select
+				setting="project"
+				label-setting="projectLabel"
+				datasource="sessions"
+				hot-reload
+				show-refresh
+				default=""
+				loading="Chargement…"
+			></sdpi-select>
+		</sdpi-item>
+		<p class="cd-help">
+			<b>Automatique</b> : les touches reçoivent les sessions dans leur ordre de démarrage.
+			Choisis un projet pour que cette touche le suive, même quand tu relances Claude Code
+			dans ce dossier. Une session apparaît dès son premier événement (envoie un prompt).
+		</p>
+
+		<hr class="cd-separator" />
+
+		<sdpi-item label="Serveur">
+			<span id="cd-server" class="cd-status">…</span>
+		</sdpi-item>
+		<sdpi-item label="Hooks">
+			<span id="cd-hooks" class="cd-status">…</span>
+		</sdpi-item>
+		<sdpi-item label="Dernier hook">
+			<span id="cd-last" class="cd-status">…</span>
+		</sdpi-item>
+		<sdpi-item label="">
+			<sdpi-button id="cd-install">Installer les hooks</sdpi-button>
+		</sdpi-item>
+		<sdpi-item label="">
+			<sdpi-button id="cd-uninstall">Retirer les hooks</sdpi-button>
+		</sdpi-item>
+		<p id="cd-result" class="cd-help" hidden></p>
+		<p id="cd-file" class="cd-help"></p>
+		<p class="cd-help">
+			Les hooks sont ajoutés aux réglages de Claude Code (avec une sauvegarde du fichier).
+			Claude Code les prend en compte tout de suite, terminal comme app desktop.
+		</p>
+
+		<script src="session.js"></script>
+	</body>
+</html>

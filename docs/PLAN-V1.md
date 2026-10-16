@@ -56,14 +56,14 @@ Attribution des emplacements : par ordre de démarrage des sessions, ou projet c
 | [x] | A3 | Gestionnaire de sessions et machine à états, avec tests sur des séquences d'événements | Les états du tableau sont atteints dans le bon ordre |
 | [x] | A4 | Installeur de hooks : fusion dans les réglages, sauvegarde, commande de retrait | Les hooks s'ajoutent et se retirent sans toucher au reste |
 | [ ] | B1 | Moteur de rendu pixel : police, palette, cadre, échelle sans lissage | Une touche de test s'affiche nette |
-| [ ] | B2 | Action « session » : emplacement lié à une session, ordre de démarrage ou projet choisi | Une session réelle change de couleur et de texte avec son état |
+| [~] | B2 | Action « session » : emplacement lié à une session, ordre de démarrage ou projet choisi | Une session réelle change de couleur et de texte avec son état — *attribution (automatique ou projet choisi dans l'inspecteur) faite le 2026-10-16 ; reste le rendu pixel et la couleur* |
 | [ ] | B3 | Badge « besoin de moi » : compteur et clignotement | Une permission en attente fait clignoter le badge |
 | [ ] | B4 | Activité en cours et chronomètre | L'outil courant et la durée s'affichent en direct |
 | [ ] | C1 | Test d'envoi de raccourcis clavier sous Windows, puis action « raccourci » configurable | Un combo choisi dans l'inspecteur déclenche l'action voulue |
 | [ ] | C2 | Action « prompt » : texte prédéfini envoyé à la fenêtre active | « continue » arrive dans la bonne fenêtre |
 | [ ] | C3 | Actions utilitaires : copier la dernière réponse, ouvrir le dossier ou le dernier fichier | Chaque action fonctionne sur une session réelle |
 | [ ] | C4 | Touche overlay (raccourci configurable) et push-to-talk (overlay puis dictée Win+H) | Un appui ouvre l'overlay et lance la dictée |
-| [ ] | D1 | Inspecteur de propriétés : port, raccourci d'overlay, options d'affichage | Les réglages persistent après redémarrage |
+| [~] | D1 | Inspecteur de propriétés : port, raccourci d'overlay, options d'affichage | Les réglages persistent après redémarrage — *avancé le 2026-10-16 : installation / retrait des hooks et diagnostic dans l'inspecteur ; restent port, overlay, affichage* |
 | [ ] | D2 | Essais de bout en bout : plusieurs sessions en parallèle, app desktop et terminal | Aucune session perdue, aucun ralentissement visible |
 | [ ] | D3 | Documentation d'installation | Une installation à froid réussit en suivant le texte |
 

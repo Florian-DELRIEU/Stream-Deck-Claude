@@ -21,27 +21,46 @@ l'ignore et continue (et chaque hook a un délai max de 5 s).
 
 Il faut Stream Deck **7.1 ou plus récent**.
 
-1. **Plugin** : double-clique sur `release/com.zv-claude-streamdeck.streamDeckPlugin`.
-   Une catégorie « Claude Deck » apparaît dans la liste des actions.
-2. **Touches** : glisse l'action **Session** sur autant de touches que tu veux voir de sessions.
-   De gauche à droite puis de haut en bas, elles reçoivent les sessions dans leur ordre de démarrage.
-3. **Hooks de Claude Code** (une seule fois), dans un terminal :
+1. **Plugin** : double-clique sur `release/com.zv-claude-streamdeck.streamDeckPlugin`
+   (en cas de mise à jour, il remplace l'ancienne version).
+2. **Touche** : glisse l'action **Session** (catégorie « Claude Deck ») sur une touche.
+3. **Hooks** : clique sur la touche, puis dans ses réglages sur **Installer les hooks**.
+   Ça ajoute les hooks du plugin à `%USERPROFILE%\.claude\settings.json` sans toucher au reste,
+   avec une copie de sauvegarde (`settings.json.bak-AAAAMMJJ-HHMMSS`). Claude Code les prend en
+   compte tout de suite, dans le terminal comme dans l'app desktop.
+4. **Envoie un prompt** dans Claude Code : la touche affiche le projet et son état.
 
-   ```powershell
-   node "$env:APPDATA\Elgato\StreamDeck\Plugins\com.zv-claude-streamdeck.sdPlugin\bin\hooks-cli.js" install
-   ```
+Pose l'action autant de fois que tu veux voir de sessions. Dans les réglages de chaque touche :
 
-   La commande fusionne les hooks dans `%USERPROFILE%\.claude\settings.json` sans toucher au reste,
-   après en avoir fait une copie (`settings.json.bak-AAAAMMJJ-HHMMSS`). Les sessions déjà ouvertes
-   les prennent en compte au prochain démarrage.
+- **Automatique** : les touches reçoivent les sessions dans leur ordre de démarrage, de gauche à
+  droite puis de haut en bas ;
+- **un projet de la liste** : la touche suit ce dossier, même quand tu relances Claude Code
+  dedans. Les touches automatiques ne le prennent plus.
 
-   | Commande | Rôle |
-   | --- | --- |
-   | `… hooks-cli.js install [--port N]` | ajoute (ou met à jour) les hooks |
-   | `… hooks-cli.js status` | liste les hooks du plugin présents |
-   | `… hooks-cli.js uninstall` | retire uniquement les hooks du plugin |
+### La touche ne change pas ?
 
-   Option `--settings chemin` pour viser un autre fichier de réglages.
+La touche et ses réglages disent ce qui manque :
+
+| Touche / réglages | Cause | Que faire |
+| --- | --- | --- |
+| `en attente de Claude` | aucun hook reçu depuis le démarrage du plugin | vérifier « Hooks : installés », puis envoyer un prompt (une session déjà ouverte n'apparaît qu'à son prochain événement) |
+| `port occupé` | un autre programme utilise le port 47615 | fermer ce programme puis redémarrer Stream Deck |
+| Hooks : absents / autre port | hooks non installés ou anciens | **Installer les hooks** |
+| Dernier hook : jamais | Claude Code n'envoie rien au plugin | vérifier que tu utilises bien ce compte Windows, et les journaux (ci-dessous) |
+| `projet fermée` | le projet choisi n'a pas de session ouverte | relancer Claude Code dans ce dossier, ou repasser la touche en Automatique |
+
+Journaux : `%APPDATA%\Elgato\StreamDeck\Plugins\com.zv-claude-streamdeck.sdPlugin\logs\`.
+
+### Retrait
+
+Bouton **Retirer les hooks** dans les réglages d'une touche (avant de désinstaller le plugin).
+En secours, la même chose en ligne de commande :
+
+```powershell
+node "$env:APPDATA\Elgato\StreamDeck\Plugins\com.zv-claude-streamdeck.sdPlugin\bin\hooks-cli.js" uninstall
+```
+
+(`install [--port N]`, `status`, et `--settings chemin` pour un autre fichier.)
 
 ## États affichés
 
@@ -53,7 +72,9 @@ Il faut Stream Deck **7.1 ou plus récent**.
 | `à toi` | attend ta réponse | notification d'attente, question MCP |
 | `fini` | réponse terminée | fin de réponse, interruption (Échap) |
 | `erreur` | erreur | échec d'outil (3 s) ou d'API (jusqu'au prochain prompt) |
-| `—` | emplacement libre | aucune session pour cette touche |
+| `—` | emplacement libre | aucune session pour cette touche automatique |
+| `en attente de Claude` | aucun hook reçu | voir « La touche ne change pas ? » |
+| `projet fermée` | projet choisi sans session ouverte | |
 
 ## Développement
 
@@ -89,8 +110,12 @@ src/
 │   ├── types.ts                 fiche de session, événement de hook
 │   ├── state-machine.ts         transitions d'état, fonction pure (A3)
 │   └── session-manager.ts       fiches, ordre des emplacements, notifications regroupées (A3)
+├── plugin-state.ts              état du serveur et dernier hook reçu (diagnostic)
 ├── hooks/
 │   ├── installer.ts             fusion / retrait dans settings.json, fonctions pures (A4)
-│   └── cli.ts                   bin/hooks-cli.js : install, uninstall, status (A4)
-└── actions/session.ts           action « Session » (texte, en attendant B1/B2)
+│   ├── settings-file.ts         lecture, sauvegarde, écriture du fichier (plugin + CLI)
+│   └── cli.ts                   bin/hooks-cli.js : install, uninstall, status (secours)
+└── actions/
+    ├── assign.ts                attribution touches ↔ sessions, titres (fonctions pures)
+    └── session.ts               action « Session » + messages de l'inspecteur (ui/session.html)
 ```
